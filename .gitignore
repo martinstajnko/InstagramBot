@@ -1,0 +1,6 @@
+constants.py
+geckodriver.log
+.mypy_cache
+.pytest_cache
+.vscode
+__pycache__

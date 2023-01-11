@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "instagrambot"
+version = "0.1.0"
+description = ""
+authors = ["martinstajnko <stajnko.martin93@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+selenium = "^4.7.2"
+webdriver-manager = "^3.8.5"
+mypy = "^0.991"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
