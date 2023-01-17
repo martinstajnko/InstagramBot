@@ -1,7 +1,10 @@
-from InstagramBot import init_driver
+from InstagramBot import init_driver, prerequisite
 from InstagramBot.bot import InstagramBot
 
+
 def main():
+
+    prerequests = prerequisite.define_prerequisites()
 
     driver = init_driver.init_driver()
 
@@ -10,21 +13,29 @@ def main():
     bot.wait_for_cookie_window()
     bot.allow_essential_cookies()
     bot.wait_for_login_window()
-    bot.login()
+    bot.login(prerequests.username, prerequests.password)
     bot.wait_to_first_page_after_login()
     bot.save_login_info()
     bot.turn_off_notifications()
     bot.click_search()
-    bot.type_input_in_search_field()
+
+    bot.execute_like_action(prerequests.values, prerequests.number_of_posts)
+
+
+    bot.type_input_in_search_field(prerequests.values)
     bot.click_on_first_search_result()
     bot.wait_until_hashtag_name_is_loaded()
     bot.click_on_first_post()
+
+    bot.wait_until_post_is_loaded()
 
     for i in range(10):
         value = bot.check_if_post_is_liked()
         if value == False:
             bot.click_like_button()
         bot.next_post()
+
+    bot.close_post()
 
     driver.quit()
 

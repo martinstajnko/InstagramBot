@@ -4,3 +4,4 @@ geckodriver.log
 .pytest_cache
 .vscode
 __pycache__
+scratches

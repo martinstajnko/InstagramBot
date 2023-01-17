@@ -1,8 +1,6 @@
 """This module contains the InstagramBot class."""
 from time import sleep
 
-import constants
-
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -34,9 +32,9 @@ class InstagramBot:
         sleep(1)
 
 
-    def login(self):
-        self._insert_username(constants.USERNAME)
-        self._insert_password(constants.PASSWORD)
+    def login(self, username: str, password: str):
+        self._insert_username(username)
+        self._insert_password(password)
         self._click_login_button()
 
 
@@ -63,7 +61,7 @@ class InstagramBot:
         self.driver.find_element(By.CSS_SELECTOR, 'div[class="_aacl _aacp _aacu _aacx _aada"]').click()
 
     
-    def type_input_in_search_field(self):
+    def type_input_in_search_field(self, searc_value: list):
         self.driver.find_element(By.CSS_SELECTOR, 'input[aria-label="Search input"]').send_keys('#bees')
 
     
@@ -80,6 +78,10 @@ class InstagramBot:
         self.driver.find_element(By.CSS_SELECTOR, 'div[class="_aabd _aa8k _aanf"]').click()
 
 
+    def wait_until_post_is_loaded(self):
+        pass
+
+
     def check_if_post_is_liked(self) -> bool:
 
         element_heart = self.driver.find_element(By.CSS_SELECTOR, 'span[class="_aamw"]')
@@ -87,7 +89,7 @@ class InstagramBot:
         try:
             element_heart.find_element(By.CSS_SELECTOR, 'svg[aria-label="Like"]')
             return False
-            
+
         except NoSuchElementException:
             print('No such element, post seems to be liked.')
             return True
@@ -102,6 +104,15 @@ class InstagramBot:
         button_right = self.driver.find_element(By.CSS_SELECTOR, 'div[class=" _aaqg _aaqh"]')
         actions.move_to_element(button_right).perform()
         actions.send_keys(Keys.RIGHT).perform()
+
+    
+    def close_post(self):
+        self.driver.find_element(By.CSS_SELECTOR, 'div[class="x10l6tqk x160vmok x1eu8d0j x1vjfegm"]').click()
+
+
+    def click_home(self):
+        self.driver.find_element(By.CSS_SELECTOR, 
+        'div[class="x9f619 x3nfvp2 x1z11no5 xjy5m1g x1mnwbp6 x4pb5v6 x1xmf6yo x1e56ztr xz9dl7a xn6708d xsag5q8 x1ye3gou x1l895ks x159b3zp xdoji71 x1v9afh1 x1sxb60h x1ug36kh xubc8zo x1dejxi8 x9k3k5o xs3sg5q x11hdxyr x12ldp4w x1wj20lx x1dn74xm xif99yt x172qv1o x10djquj x1lhsz42 xzauu7c"]').click()
 
     
     def _insert_username(self, username):
