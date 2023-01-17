@@ -8,6 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 
 
 class InstagramBot:
@@ -69,9 +70,27 @@ class InstagramBot:
     def click_on_first_search_result(self):
         self.driver.find_element(By.CSS_SELECTOR, 'div[role="none"]').click()
 
+
+    def wait_until_hashtag_name_is_loaded(self):
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, 'div[class="_aabd _aa8k _aanf"]')))
+        sleep(1)
     
+
     def click_on_first_post(self):
         self.driver.find_element(By.CSS_SELECTOR, 'div[class="_aabd _aa8k _aanf"]').click()
+
+
+    def check_if_post_is_liked(self) -> bool:
+
+        element_heart = self.driver.find_element(By.CSS_SELECTOR, 'span[class="_aamw"]')
+
+        try:
+            element_heart.find_element(By.CSS_SELECTOR, 'svg[aria-label="Like"]')
+            return False
+            
+        except NoSuchElementException:
+            print('No such element, post seems to be liked.')
+            return True
 
 
     def click_like_button(self):
