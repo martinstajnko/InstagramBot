@@ -59,9 +59,26 @@ class InstagramBot:
     
     def click_search(self):
         self.driver.find_element(By.CSS_SELECTOR, 'div[class="_aacl _aacp _aacu _aacx _aada"]').click()
-
     
-    def type_input_in_search_field(self, searc_value: list):
+    def execute_like_action(self, values: list, number_of_posts: int):
+
+        for value in values:
+            self.type_input_in_search_field(value)
+            self.click_on_first_search_result()
+            
+
+        for i in range(number_of_posts):
+            self.type_input_in_search_field(values)
+            self.click_on_first_search_result()
+            self.wait_until_hashtag_name_is_loaded()
+            self.click_on_first_post()
+            self.wait_until_post_is_loaded()
+            self.like_post()
+            self.close_post()
+            self.click_search()
+            sleep(1)
+
+    def type_input_in_search_field(self):
         self.driver.find_element(By.CSS_SELECTOR, 'input[aria-label="Search input"]').send_keys('#bees')
 
     
