@@ -16,32 +16,12 @@ def main():
     bot.login(prerequests.username, prerequests.password)
     bot.wait_to_first_page_after_login()
     bot.save_login_info()
-    bot.turn_off_notifications()
-    bot.click_search()
-
-    bot.execute_like_action(prerequests.values, prerequests.number_of_posts)
-
-
-    bot.type_input_in_search_field(prerequests.values)
-    bot.click_on_first_search_result()
-    bot.wait_until_hashtag_name_is_loaded()
-    bot.click_on_first_post()
-
-    bot.wait_until_post_is_loaded()
-
-    for i in range(10):
-        value = bot.check_if_post_is_liked()
-        if value == False:
-            bot.click_like_button()
-        bot.next_post()
-
-    bot.close_post()
+    bot.turn_off_notifications(True)
+    bot.execute_like_action(prerequests.values, prerequests.number_of_posts) #(['#nature', '#dogs', '#wolfs'], 3)
 
     driver.quit()
 
 if __name__ == "__main__":
-    # print('Which action do you want to do: 1.Like 2.Follow')
-    # x = input()
     main()
 
 
