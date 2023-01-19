@@ -10,13 +10,11 @@ Each time the script is going to be run web driver is going to be downloaded aut
 * Python 3
 * Poetry for packaging and dependency management -> documentation [Poetry](https://python-poetry.org/docs/).
 * Selenium
-* A web driver for your browser of choice (e.g. ChromeDriver for Google Chrome) - NOT NECESARRY
 * Instagram account with username and password
 
 ## Installation
 1. Clone the repository: ```git clone https://github.com/martinstajnko/InstagramBot```
 2. Install the required packages: ```poetry install```
-3. Download the web driver for your browser and add it to your PATH - NOT NECESARRY
 
 ## Usage
 1. Run the script: ```poetry run python main.py```
